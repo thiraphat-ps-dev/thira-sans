@@ -1,6 +1,6 @@
 {
   "name": "thira-sans",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Thira Sans: a Thai + Latin variable sans-serif (weight 100-700) as self-hosted webfonts",
   "license": "OFL-1.1",
   "author": "Thiraphat Phutson",
@@ -11,24 +11,67 @@
     "directory": "npm"
   },
   "bugs": "https://github.com/thiraphat-ps-dev/thira-sans/issues",
-  "keywords": ["font", "webfont", "thai", "typeface", "variable-font", "woff2", "css"],
+  "keywords": [
+    "font",
+    "webfont",
+    "thai",
+    "typeface",
+    "variable-font",
+    "woff2",
+    "css"
+  ],
   "style": "index.css",
   "exports": {
-    ".": "./index.css",
-    "./variable.css": "./index.css",
-    "./100.css": "./100.css",
-    "./200.css": "./200.css",
-    "./300.css": "./300.css",
-    "./400.css": "./400.css",
-    "./500.css": "./500.css",
-    "./600.css": "./600.css",
-    "./700.css": "./700.css",
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.css"
+    },
+    "./variable.css": {
+      "types": "./index.d.ts",
+      "default": "./index.css"
+    },
+    "./100.css": {
+      "types": "./index.d.ts",
+      "default": "./100.css"
+    },
+    "./200.css": {
+      "types": "./index.d.ts",
+      "default": "./200.css"
+    },
+    "./300.css": {
+      "types": "./index.d.ts",
+      "default": "./300.css"
+    },
+    "./400.css": {
+      "types": "./index.d.ts",
+      "default": "./400.css"
+    },
+    "./500.css": {
+      "types": "./index.d.ts",
+      "default": "./500.css"
+    },
+    "./600.css": {
+      "types": "./index.d.ts",
+      "default": "./600.css"
+    },
+    "./700.css": {
+      "types": "./index.d.ts",
+      "default": "./700.css"
+    },
     "./files/*": "./files/*",
     "./package.json": "./package.json"
   },
-  "files": ["*.css", "files/", "OFL.txt"],
-  "sideEffects": ["*.css"],
+  "files": [
+    "*.css",
+    "index.d.ts",
+    "files/",
+    "OFL.txt"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "types": "index.d.ts"
 }
