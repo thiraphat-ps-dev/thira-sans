@@ -1,0 +1,34 @@
+{
+  "name": "thira-sans",
+  "version": "0.1.0",
+  "description": "Thira Sans: a Thai + Latin variable sans-serif (weight 100-700) as self-hosted webfonts",
+  "license": "OFL-1.1",
+  "author": "Thiraphat Phutson",
+  "homepage": "https://thiraphat-ps-dev.github.io/thira-sans/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiraphat-ps-dev/thira-sans.git",
+    "directory": "npm"
+  },
+  "bugs": "https://github.com/thiraphat-ps-dev/thira-sans/issues",
+  "keywords": ["font", "webfont", "thai", "typeface", "variable-font", "woff2", "css"],
+  "style": "index.css",
+  "exports": {
+    ".": "./index.css",
+    "./variable.css": "./index.css",
+    "./100.css": "./100.css",
+    "./200.css": "./200.css",
+    "./300.css": "./300.css",
+    "./400.css": "./400.css",
+    "./500.css": "./500.css",
+    "./600.css": "./600.css",
+    "./700.css": "./700.css",
+    "./files/*": "./files/*",
+    "./package.json": "./package.json"
+  },
+  "files": ["*.css", "files/", "OFL.txt"],
+  "sideEffects": ["*.css"],
+  "publishConfig": {
+    "access": "public"
+  }
+}

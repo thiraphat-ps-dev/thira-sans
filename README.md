@@ -6,6 +6,18 @@ A Thai + Latin sans-serif, variable weight 100–700. Thira Sans is a fork of [A
 
 **Status: 0.100, a straight fork.** The outlines are still Anuphan's. The fork exists so the design can change from here; see [Roadmap](#roadmap).
 
+## Use it on the web
+
+```sh
+npm install thira-sans
+```
+
+```js
+import 'thira-sans'; // variable font, weights 100–700
+```
+
+See [npm/README.md](npm/README.md) for static weights.
+
 ## Repository layout
 
 | Path                       | What it is                                                                      |
@@ -13,6 +25,7 @@ A Thai + Latin sans-serif, variable weight 100–700. Thira Sans is a fork of [A
 | `sources/ThiraSans.glyphs` | The source (Glyphs 3 format): 3 masters (100, 400, 700), 7 named instances      |
 | `sources/config.yaml`      | [gftools builder](https://github.com/googlefonts/gftools) config                |
 | `proof/index.html`         | Proof page: display text, Thai mark stacking, `line-clamp` clipping, weights    |
+| `npm/`, `scripts/`         | The npm package (`thira-sans`): CSS + woff2, assembled from the build by `scripts/package-npm.mjs` |
 | `.github/workflows/`       | CI builds TTF/OTF/variable/webfonts, uploads them as an artifact and deploys the proof to Pages |
 
 ## Building
@@ -40,7 +53,7 @@ Thai mark positioning comes from anchors (`top`, `bottom`, `_top`, …) plus the
 1. Pick the character of Thira Sans: head shapes (loop, loopless or cut), terminals, proportions.
 2. Redraw the Thai consonants that carry that character, then propagate it through the rest of the set.
 3. Retune spacing and vertical metrics for UI use (`line-clamp` safe, comfortable at 14–16px).
-4. Publish webfonts to npm for use in thira-ui and the portfolio.
+4. Use Thira Sans in thira-ui and the portfolio. (Published to npm as `thira-sans` since 0.1.0.)
 
 ## Credits
 

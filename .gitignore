@@ -2,3 +2,6 @@
 build/
 fonts/
 proof/fonts/
+npm/files/
+npm/*.css
+npm/OFL.txt

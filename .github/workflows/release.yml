@@ -1,0 +1,48 @@
+name: Release
+
+# Publish the npm package when a version tag (e.g. v0.2.0) is pushed, or manually from main.
+# Uses npm trusted publishing (OIDC): no NPM_TOKEN secret, provenance is attached automatically.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+      # No registry-url: it injects a placeholder NODE_AUTH_TOKEN that breaks OIDC publishing.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: pip install -r requirements.txt
+      - name: Tag matches npm/package.json version
+        if: github.event_name == 'push'
+        run: test "v$(node -p "require('./npm/package.json').version")" = "$GITHUB_REF_NAME"
+      - name: Manual runs only release from main
+        if: github.event_name == 'workflow_dispatch'
+        run: test "$GITHUB_REF_NAME" = "main"
+      - name: Build fonts
+        run: gftools builder sources/config.yaml
+      - name: Assemble the npm package
+        run: node scripts/package-npm.mjs
+      - name: Publish (skip if this version is already on npm)
+        working-directory: npm
+        run: |
+          V=$(node -p "require('./package.json').version")
+          if npm view "thira-sans@$V" version >/dev/null 2>&1; then
+            echo "thira-sans@$V is already published, skipping."
+          else
+            npm publish
+          fi
