@@ -2,6 +2,8 @@
 
 A Thai + Latin sans-serif, variable weight 100–700. Thira Sans is a fork of [Anuphan](https://github.com/cadsondemak/Anuphan) by Cadson Demak, released under the [SIL Open Font License 1.1](OFL.txt).
 
+**Proof page:** https://thiraphat-ps-dev.github.io/thira-sans/
+
 **Status: 0.100, a straight fork.** The outlines are still Anuphan's. The fork exists so the design can change from here; see [Roadmap](#roadmap).
 
 ## Repository layout
@@ -11,7 +13,7 @@ A Thai + Latin sans-serif, variable weight 100–700. Thira Sans is a fork of [A
 | `sources/ThiraSans.glyphs` | The source (Glyphs 3 format): 3 masters (100, 400, 700), 7 named instances      |
 | `sources/config.yaml`      | [gftools builder](https://github.com/googlefonts/gftools) config                |
 | `proof/index.html`         | Proof page: display text, Thai mark stacking, `line-clamp` clipping, weights    |
-| `.github/workflows/`       | CI builds TTF/OTF/variable/webfonts and uploads them with the proof as artifact |
+| `.github/workflows/`       | CI builds TTF/OTF/variable/webfonts, uploads them as an artifact and deploys the proof to Pages |
 
 ## Building
 
