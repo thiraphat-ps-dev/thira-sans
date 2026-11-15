@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thira Sans proof</title>
+    <style>
+      @font-face {
+        font-family: 'Thira Sans';
+        src:
+          url('fonts/ThiraSans-VF.woff2') format('woff2'),
+          url('fonts/ThiraSans-VF.ttf') format('truetype');
+        font-weight: 100 700;
+        font-display: block;
+      }
+      :root {
+        --wght: 400;
+        color-scheme: light dark;
+      }
+      body {
+        margin: 0;
+        padding: 24px 16px 64px;
+        background: Canvas;
+        color: CanvasText;
+        font-family: 'Thira Sans', sans-serif;
+        font-weight: var(--wght);
+      }
+      main {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+        align-items: center;
+        padding: 12px 0;
+        background: Canvas;
+        border-bottom: 1px solid color-mix(in srgb, CanvasText 15%, transparent);
+        font: 14px/1.4 system-ui, sans-serif;
+      }
+      label {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      h2 {
+        margin: 40px 0 8px;
+        font: 600 12px/1.4 system-ui, sans-serif;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.6;
+      }
+      .display {
+        font-size: clamp(40px, 9vw, 96px);
+        line-height: 1.25;
+        margin: 0;
+      }
+      .marks {
+        font-size: 56px;
+        line-height: 1.6;
+        word-spacing: 0.3em;
+        margin: 0;
+      }
+      .marks.boxed span {
+        outline: 1px dashed color-mix(in srgb, CanvasText 30%, transparent);
+      }
+      .clamp {
+        max-width: 28ch;
+        font-size: 20px;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        background: color-mix(in srgb, CanvasText 6%, transparent);
+      }
+      .para {
+        font-size: 18px;
+        line-height: 1.7;
+        max-width: 62ch;
+      }
+      .weights p {
+        margin: 4px 0;
+        font-size: 28px;
+        line-height: 1.5;
+      }
+      .weights small {
+        display: inline-block;
+        width: 3.5em;
+        font: 12px system-ui, sans-serif;
+        opacity: 0.6;
+      }
+      .mixed {
+        font-size: 32px;
+        line-height: 1.5;
+      }
+      #status {
+        margin-left: auto;
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <strong>Thira Sans</strong>
+        <label>
+          Weight
+          <input id="wght" type="range" min="100" max="700" value="400" />
+          <output id="wght-out">400</output>
+        </label>
+        <label><input id="boxes" type="checkbox" /> Show glyph boxes</label>
+        <span id="status">Loading font…</span>
+      </header>
+
+      <h2>Display</h2>
+      <p class="display">โค้ดที่อยู่ได้นาน<br />Code that lasts.</p>
+
+      <h2>Marks: stacking and collisions</h2>
+      <p class="marks" id="marks">
+        <span>ปี่</span> <span>ปั้น</span> <span>ฝั่ง</span> <span>ฟ้า</span> <span>ฬ้</span>
+        <span>น้ำ</span> <span>ป่ำ</span> <span>ญู</span> <span>ฐู</span> <span>ฎุ</span>
+        <span>ฏู</span> <span>ก็</span> <span>กี่</span> <span>ที่</span> <span>เสื้อ</span>
+        <span>ตั้ง</span> <span>นิ้ว</span> <span>ฤๅ</span> <span>กรุงเทพฯ</span> <span>๑๒๓</span>
+        <span>฿</span>
+      </p>
+
+      <h2>Clipping under line-clamp</h2>
+      <p class="clamp">
+        ผู้ใช้ที่เลื่อนหน้าจออย่างรวดเร็วจะเห็นว่าสระบนและวรรณยุกต์ไม่ถูกตัดหาย แม้ข้อความจะถูกจำกัดไว้เพียงสองบรรทัด
+        และซ่อนส่วนที่เกินไว้ด้านล่าง
+      </p>
+
+      <h2>Paragraph</h2>
+      <p class="para">
+        การออกแบบระบบที่ดีเริ่มจากการเข้าใจผู้ใช้ ทีมพัฒนาควรทดสอบกับข้อความจริงตั้งแต่ต้น ทั้งภาษาไทยและภาษาอังกฤษ
+        เพราะตัวอักษรไทยมีสระและวรรณยุกต์ที่ซ้อนกันได้หลายชั้น หากระยะบรรทัดแคบเกินไป
+        เครื่องหมายเหล่านี้อาจชนกันหรือถูกตัดหาย ทำให้อ่านยากโดยเฉพาะบนหน้าจอขนาดเล็ก
+      </p>
+      <p class="para">
+        Good systems start with understanding people. Test with real text early, in every language you ship,
+        at every size you use.
+      </p>
+
+      <h2>Mixed scripts</h2>
+      <p class="mixed">ราคา 1,290฿ · React 19 · ตั้งแต่ 09:00–18:00 น. · “คำพูด” (วงเล็บ)</p>
+
+      <h2>Weights</h2>
+      <div class="weights" id="weights"></div>
+    </main>
+    <script>
+      const root = document.documentElement;
+      const wght = document.getElementById('wght');
+      const out = document.getElementById('wght-out');
+      wght.addEventListener('input', () => {
+        root.style.setProperty('--wght', wght.value);
+        out.value = wght.value;
+      });
+      document.getElementById('boxes').addEventListener('change', (e) => {
+        document.getElementById('marks').classList.toggle('boxed', e.target.checked);
+      });
+      const names = { 100: 'Thin', 200: 'ExtraLight', 300: 'Light', 400: 'Regular', 500: 'Medium', 600: 'SemiBold', 700: 'Bold' };
+      document.getElementById('weights').innerHTML = Object.entries(names)
+        .map(([w, n]) => `<p style="font-weight:${w}"><small>${w}</small>${n} · ภาษาไทยอ่านง่าย 0123</p>`)
+        .join('');
+      document.fonts.load("400 16px 'Thira Sans'").then((f) => {
+        document.getElementById('status').textContent = f.length
+          ? 'Font loaded'
+          : 'Font not found: build it first (see README)';
+      });
+    </script>
+  </body>
+</html>
