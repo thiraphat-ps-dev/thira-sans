@@ -4,7 +4,7 @@ A Thai + Latin sans-serif, variable weight 100–700. Thira Sans is a fork of [A
 
 **Proof page:** https://thiraphat-ps-dev.github.io/thira-sans/
 
-**Status: 0.100, a straight fork.** The outlines are still Anuphan's. The fork exists so the design can change from here; see [Roadmap](#roadmap).
+**Status: 0.200, soft corners.** Every sharp corner of the Anuphan outlines is rounded (radius grows with weight), which gives Thira Sans a friendlier, softer tone that matches [thira-ui](https://github.com/thiraphat-ps-dev/thira-ui). Letter shapes are otherwise still Anuphan's; see [Roadmap](#roadmap).
 
 ## Use it on the web
 
@@ -18,6 +18,20 @@ import 'thira-sans'; // variable font, weights 100–700
 
 See [npm/README.md](npm/README.md) for static weights.
 
+### OpenType features
+
+| Feature | What it does |
+| ------- | ------------ |
+| `ss01`  | Thai alternates: ข ฃ ฅ ฉ ช ซ ญ ฑ ใ with different heads/tails |
+| `ss02`  | Alternate ญ |
+| `ss03`  | Single-storey **a** and **g** (and their accented forms) |
+| `ss04`  | Dotted zero |
+| `zero`  | Slashed zero |
+
+```css
+body { font-feature-settings: 'ss03'; }
+```
+
 ## Repository layout
 
 | Path                       | What it is                                                                      |
@@ -26,6 +40,8 @@ See [npm/README.md](npm/README.md) for static weights.
 | `sources/config.yaml`      | [gftools builder](https://github.com/googlefonts/gftools) config                |
 | `proof/index.html`         | Proof page: display text, Thai mark stacking, `line-clamp` clipping, weights    |
 | `npm/`, `scripts/`         | The npm package (`thira-sans`): CSS + woff2, assembled from the build by `scripts/package-npm.mjs` |
+| `scripts/round-corners.mjs` | One-off transform that rounded the corners of every master (already applied; don't run it twice) |
+| `scripts/preview-glyphs.mjs` | Renders glyphs from a `.glyphs` file to HTML/SVG, for checking shapes without building |
 | `.github/workflows/`       | CI builds TTF/OTF/variable/webfonts, uploads them as an artifact and deploys the proof to Pages |
 
 ## Building
@@ -50,7 +66,7 @@ Thai mark positioning comes from anchors (`top`, `bottom`, `_top`, …) plus the
 
 ## Roadmap
 
-1. Pick the character of Thira Sans: head shapes (loop, loopless or cut), terminals, proportions.
+1. ~~Pick the character~~: soft, rounded corners (0.200). Next: head shapes (loop, loopless or cut) and proportions.
 2. Redraw the Thai consonants that carry that character, then propagate it through the rest of the set.
 3. Retune spacing and vertical metrics for UI use (`line-clamp` safe, comfortable at 14–16px).
 4. Use Thira Sans in thira-ui and the portfolio. (Published to npm as `thira-sans` since 0.1.0.)

@@ -24,6 +24,18 @@
         color: CanvasText;
         font-family: 'Thira Sans', sans-serif;
         font-weight: var(--wght);
+        font-feature-settings: var(--features, normal);
+      }
+      .sets p {
+        margin: 4px 0;
+        font-size: 32px;
+        line-height: 1.5;
+      }
+      .sets small {
+        display: inline-block;
+        width: 9em;
+        font: 12px system-ui, sans-serif;
+        opacity: 0.6;
       }
       main {
         max-width: 960px;
@@ -113,6 +125,10 @@
           <output id="wght-out">400</output>
         </label>
         <label><input id="boxes" type="checkbox" /> Show glyph boxes</label>
+        <label><input class="feat" value="ss01" type="checkbox" /> ss01</label>
+        <label><input class="feat" value="ss03" type="checkbox" /> ss03</label>
+        <label><input class="feat" value="ss04" type="checkbox" /> ss04</label>
+        <label><input class="feat" value="zero" type="checkbox" /> zero</label>
         <span id="status">Loading font…</span>
         <a href="https://github.com/thiraphat-ps-dev/thira-sans">GitHub</a>
       </header>
@@ -149,6 +165,16 @@
       <h2>Mixed scripts</h2>
       <p class="mixed">ราคา 1,290฿ · React 19 · ตั้งแต่ 09:00–18:00 น. · “คำพูด” (วงเล็บ)</p>
 
+      <h2>Stylistic sets</h2>
+      <div class="sets">
+        <p><small>default</small>a g 0 · ขฃฅฉชซญฑใ</p>
+        <p style="font-feature-settings: 'ss01'"><small>ss01 Thai alternates</small>ขฃฅฉชซญฑใ</p>
+        <p style="font-feature-settings: 'ss02'"><small>ss02 alternate ญ</small>ญ ญาติ</p>
+        <p style="font-feature-settings: 'ss03'"><small>ss03 single-storey a g</small>a g · Hang a garage flag</p>
+        <p style="font-feature-settings: 'ss04'"><small>ss04 dotted zero</small>0 · 1,000,000</p>
+        <p style="font-feature-settings: 'zero'"><small>zero slashed zero</small>0 · 1,000,000</p>
+      </div>
+
       <h2>Weights</h2>
       <div class="weights" id="weights"></div>
     </main>
@@ -163,6 +189,13 @@
       document.getElementById('boxes').addEventListener('change', (e) => {
         document.getElementById('marks').classList.toggle('boxed', e.target.checked);
       });
+      const feats = [...document.querySelectorAll('.feat')];
+      for (const f of feats) {
+        f.addEventListener('change', () => {
+          const on = feats.filter((x) => x.checked).map((x) => `'${x.value}'`);
+          root.style.setProperty('--features', on.length ? on.join(', ') : 'normal');
+        });
+      }
       const names = { 100: 'Thin', 200: 'ExtraLight', 300: 'Light', 400: 'Regular', 500: 'Medium', 600: 'SemiBold', 700: 'Bold' };
       document.getElementById('weights').innerHTML = Object.entries(names)
         .map(([w, n]) => `<p style="font-weight:${w}"><small>${w}</small>${n} · ภาษาไทยอ่านง่าย 0123</p>`)

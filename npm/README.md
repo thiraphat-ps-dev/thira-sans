@@ -50,7 +50,7 @@ The font files are also exported as `thira-sans/files/*.woff2` if you want to wr
 
 ## Status
 
-0.x: Thira Sans is a fork of [Anuphan](https://github.com/cadsondemak/Anuphan) by Cadson Demak and is being redesigned. Glyph shapes and metrics will change between minor versions.
+0.x: Thira Sans has soft, rounded corners since 0.2.0 and supports `ss03` (single-storey a/g), `ss04` (dotted zero) and `zero` (slashed zero). It is a fork of [Anuphan](https://github.com/cadsondemak/Anuphan) by Cadson Demak and is being redesigned. Glyph shapes and metrics will change between minor versions.
 
 ## License
 
