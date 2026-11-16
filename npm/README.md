@@ -61,7 +61,7 @@ Below that, the tallest stacks can be cut at the top of the first line and the b
 
 ## Status
 
-0.x: Thira Sans has soft, rounded corners since 0.2.0 and supports `ss03` (single-storey a/g), `ss04` (dotted zero) and `zero` (slashed zero). It is a fork of [Anuphan](https://github.com/cadsondemak/Anuphan) by Cadson Demak and is being redesigned. Glyph shapes and metrics will change between minor versions.
+0.x: Thira Sans has soft, rounded corners since 0.2.0 and supports `ss03` (single-storey a/g), `ss04` (dotted zero) and `zero` (slashed zero). Since 0.3.0 `line-height: normal` is 1.5 and stacked Thai marks are no longer clipped on Windows. It is a fork of [Anuphan](https://github.com/cadsondemak/Anuphan) by Cadson Demak and is being redesigned. Glyph shapes and metrics will change between minor versions.
 
 ## License
 
