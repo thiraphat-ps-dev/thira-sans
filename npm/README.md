@@ -48,6 +48,17 @@ import 'thira-sans/700.css';
 
 The font files are also exported as `thira-sans/files/*.woff2` if you want to write your own `@font-face`.
 
+## Line height
+
+`line-height: normal` is 1.5. Thai tone marks stack above vowels (ปี๊บ) and some vowels hang below the letter (ฎุ), so a clipping box (`overflow: hidden`, `line-clamp`) needs room for them:
+
+| Weight | Smallest line-height that never clips |
+| --- | --- |
+| 100–600 | 1.5 |
+| 700 | 1.55 |
+
+Below that, the tallest stacks can be cut at the top of the first line and the bottom of the last. The [metrics page](https://thiraphat-ps-dev.github.io/thira-sans/metrics.html) shows the same numbers in the browser.
+
 ## Status
 
 0.x: Thira Sans has soft, rounded corners since 0.2.0 and supports `ss03` (single-storey a/g), `ss04` (dotted zero) and `zero` (slashed zero). It is a fork of [Anuphan](https://github.com/cadsondemak/Anuphan) by Cadson Demak and is being redesigned. Glyph shapes and metrics will change between minor versions.

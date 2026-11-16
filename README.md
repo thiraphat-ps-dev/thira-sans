@@ -32,6 +32,17 @@ See [npm/README.md](npm/README.md) for static weights.
 body { font-feature-settings: 'ss03'; }
 ```
 
+### Line height
+
+`line-height: normal` is 1.5. Thai tone marks stack above vowels (ปี๊บ) and some vowels hang below the letter (ฎุ), so a clipping box (`overflow: hidden`, `line-clamp`) needs room for them:
+
+| Weight | Smallest line-height that never clips |
+| --- | --- |
+| 100–600 | 1.5 |
+| 700 | 1.55 |
+
+Below that, the tallest stacks can be cut at the top of the first line and the bottom of the last. CI checks every weight (`scripts/check-metrics.py`), and [proof/metrics.html](proof/metrics.html) shows the same numbers in the browser.
+
 ## Repository layout
 
 | Path                       | What it is                                                                      |
