@@ -5,3 +5,4 @@ proof/fonts/
 npm/files/
 npm/*.css
 npm/OFL.txt
+__pycache__/

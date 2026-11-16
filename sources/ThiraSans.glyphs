@@ -332,11 +332,11 @@ value = 0;
 },
 {
 name = winAscent;
-value = 1119;
+value = 1180;
 },
 {
 name = winDescent;
-value = 324;
+value = 430;
 },
 {
 name = underlineThickness;
@@ -459,11 +459,11 @@ value = 0;
 },
 {
 name = winAscent;
-value = 1119;
+value = 1180;
 },
 {
 name = winDescent;
-value = 324;
+value = 430;
 },
 {
 name = underlineThickness;
@@ -580,11 +580,11 @@ value = 0;
 },
 {
 name = winAscent;
-value = 1119;
+value = 1180;
 },
 {
 name = winDescent;
-value = 324;
+value = 430;
 },
 {
 name = underlineThickness;

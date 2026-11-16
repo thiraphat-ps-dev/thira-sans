@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thira Sans: vertical metrics check</title>
+    <style>
+      @font-face {
+        font-family: 'Thira Sans VF';
+        src:
+          url('fonts/ThiraSans-VF.woff2') format('woff2'),
+          url('fonts/ThiraSans-VF.ttf') format('truetype');
+        font-weight: 100 700;
+      }
+      :root {
+        color-scheme: light;
+        --ink: #1b1d24;
+        --muted: #5d6170;
+        --bad: #c62828;
+        --ok: #2e7d32;
+      }
+      body {
+        margin: 0;
+        padding: 24px 16px 64px;
+        font: 15px/1.5 system-ui, sans-serif;
+        color: var(--ink);
+        background: #fafafa;
+      }
+      main {
+        max-width: 1080px;
+        margin-inline: auto;
+      }
+      h1 {
+        margin: 0 0 4px;
+        font-size: 1.6rem;
+      }
+      p.lead {
+        margin: 0 0 24px;
+        color: var(--muted);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 28px;
+        font-variant-numeric: tabular-nums;
+      }
+      th,
+      td {
+        padding: 6px 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      td.bad {
+        color: var(--bad);
+        font-weight: 600;
+      }
+      td.ok {
+        color: var(--ok);
+      }
+      .sample {
+        font-family: 'Thira Sans VF';
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 16px;
+      }
+      .clamp-case {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+      }
+      .clamp-case h3 {
+        margin: 0 0 6px;
+        font: 600 0.8rem system-ui;
+        color: var(--muted);
+      }
+      .clamp {
+        font-family: 'Thira Sans VF';
+        font-size: 16px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        outline: 1px dashed #c62828;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Vertical metrics check</h1>
+      <p class="lead">
+        Ink extents measured in the browser (real shaping, so stacked Thai marks are placed by the font's GPOS), against
+        the ascent and descent the browser uses for the line box. "Min line-height" is the smallest
+        <code>line-height</code> at which the worst string is not clipped by <code>overflow: hidden</code> or
+        <code>line-clamp</code>.
+      </p>
+      <div id="out">Measuring…</div>
+      <h2>line-clamp: 2 at 16px</h2>
+      <p class="lead">The dashed box is the clip edge. The first and last visible lines carry the tallest and deepest stacks.</p>
+      <div class="grid" id="clamps"></div>
+    </main>
+    <script type="module">
+      const SAMPLES = {
+        'Thai, above': ['ปิ่น', 'ปี๊บ', 'ฝื้น', 'ปั้น', 'ป่ำ', 'น้ำ', 'ปั๋ว', 'ฟื้น', 'ฬี่', 'ปิ๋ว', 'ศิลป์', 'ฝั่ง', 'ปื้น'],
+        'Thai, below': ['ฎุ', 'ฏู', 'ญู', 'ฐุ', 'ฤ', 'ฦ', 'ปู่', 'ฎู', 'ฏุ', 'ฤๅ', 'กู้', 'ญุ'],
+        'Latin, above': ['ÅÉÎ', 'Ǻ', 'Ẫ', 'Ở', 'Ặ', 'Ằ', 'ẫ', 'Ẵ', 'Ĳ', 'Ŀ'],
+        'Latin, below': ['gjpqy', 'Ç', 'Ą', 'ẹ', 'ặ', 'ỵ', 'ţ', 'ș', '()[]{}|', 'Q'],
+      };
+      const WEIGHTS = [100, 200, 300, 400, 500, 600, 700];
+      const SIZE = 1000; // 1 px = 1 font unit
+      await document.fonts.load(`400 ${SIZE}px "Thira Sans VF"`);
+      const ctx = document.createElement('canvas').getContext('2d');
+
+      const result = { weights: {}, worst: {} };
+      for (const w of WEIGHTS) {
+        ctx.font = `${w} ${SIZE}px "Thira Sans VF"`;
+        const base = ctx.measureText('x');
+        const A = base.fontBoundingBoxAscent / SIZE;
+        const D = base.fontBoundingBoxDescent / SIZE;
+        const row = { ascent: A, descent: D, groups: {} };
+        for (const [group, list] of Object.entries(SAMPLES)) {
+          let top = { v: -Infinity, s: '' };
+          let bottom = { v: -Infinity, s: '' };
+          for (const s of list) {
+            const m = ctx.measureText(s);
+            const a = m.actualBoundingBoxAscent / SIZE;
+            const d = m.actualBoundingBoxDescent / SIZE;
+            if (a > top.v) top = { v: a, s };
+            if (d > bottom.v) bottom = { v: d, s };
+          }
+          row.groups[group] = { top, bottom };
+        }
+        result.weights[w] = row;
+      }
+
+      // smallest line-height (em) with no clipping: half-leading must cover the overshoot
+      const minLH = (A, D, a, d) => Math.max(2 * a - A + D, 2 * d - D + A, 0);
+      const f = (v) => v.toFixed(3);
+      let html =
+        '<table><thead><tr><th>wght</th><th>ascent / descent</th><th>line-height: normal</th>' +
+        Object.keys(SAMPLES)
+          .map((g) => `<th>${g}: ink top / bottom</th>`)
+          .join('') +
+        '<th>min line-height</th></tr></thead><tbody>';
+      let overall = 0;
+      for (const [w, row] of Object.entries(result.weights)) {
+        let need = 0;
+        const cells = Object.values(row.groups).map(({ top, bottom }) => {
+          const n = minLH(row.ascent, row.descent, top.v, bottom.v);
+          need = Math.max(need, n);
+          const overT = top.v > row.ascent;
+          const overB = bottom.v > row.descent;
+          return `<td class="${overT || overB ? 'bad' : 'ok'}">${f(top.v)} <span class="sample">${top.s}</span> / ${f(bottom.v)} <span class="sample">${bottom.s}</span></td>`;
+        });
+        overall = Math.max(overall, need);
+        row.minLineHeight = need;
+        html += `<tr><td>${w}</td><td>${f(row.ascent)} / ${f(row.descent)}</td><td>${f(row.ascent + row.descent)}</td>${cells.join('')}<td>${f(need)}</td></tr>`;
+      }
+      html += `</tbody></table><p>Worst case across weights: line-height ≥ <strong>${f(overall)}</strong> to avoid clipping.</p>`;
+      result.minLineHeight = overall;
+      document.getElementById('out').innerHTML = html;
+
+      const clampText = [
+        'ปิ่นปี๊บฝื้นปั้น น้ำป่ำ ศิลป์ ฬี่ ปั๋ว ปิ๋ว',
+        'ข้อความบรรทัดกลางสำหรับทดสอบ line-clamp ของฟอนต์ไทย',
+        'ฎุฏูญูฐุ ฤๅ ฦ ปู่ กู้ ญุ Ẫ Ở gjpqy',
+        'บรรทัดนี้ต้องถูกซ่อน',
+      ];
+      const clamps = document.getElementById('clamps');
+      for (const lh of ['normal', '1.3', '1.4', '1.5', '1.6']) {
+        for (const w of [400, 700]) {
+          const box = document.createElement('div');
+          box.className = 'clamp-case';
+          box.innerHTML = `<h3>line-height ${lh}, wght ${w}</h3>`;
+          const p = document.createElement('p');
+          p.className = 'clamp';
+          p.style.lineHeight = lh;
+          p.style.fontWeight = w;
+          p.style.margin = '0';
+          p.style.width = '210px';
+          p.textContent = clampText.join(' ');
+          box.append(p);
+          clamps.append(box);
+        }
+      }
+      window.__metrics = result;
+    </script>
+  </body>
+</html>

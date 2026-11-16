@@ -24,6 +24,8 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Build fonts
         run: gftools builder sources/config.yaml
+      - name: Check vertical metrics against shaped Thai and Latin stacks
+        run: python scripts/check-metrics.py fonts/ttf/*.ttf
       - name: Variable webfont for the proof page
         run: |
           mkdir -p proof/fonts
