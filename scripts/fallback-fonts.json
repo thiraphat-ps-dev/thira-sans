@@ -1,0 +1,37 @@
+{
+  "Arial": {
+    "local": [
+      "Arial",
+      "ArialMT"
+    ],
+    "sample": "latin",
+    "avgWidth": 0.44402,
+    "version": "Version 7.07"
+  },
+  "Arial Bold": {
+    "local": [
+      "Arial Bold",
+      "Arial-BoldMT"
+    ],
+    "sample": "latin",
+    "avgWidth": 0.47638,
+    "version": "Version 7.07"
+  },
+  "Tahoma": {
+    "local": [
+      "Tahoma"
+    ],
+    "sample": "thai",
+    "avgWidth": 0.43556,
+    "version": "Version 7.05"
+  },
+  "Tahoma Bold": {
+    "local": [
+      "Tahoma Bold",
+      "Tahoma-Bold"
+    ],
+    "sample": "thai",
+    "avgWidth": 0.478,
+    "version": "Version 7.05"
+  }
+}

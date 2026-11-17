@@ -21,11 +21,17 @@ import 'thira-sans';
 
 ```css
 body {
-  font-family: 'Thira Sans', system-ui, sans-serif;
+  font-family: 'Thira Sans', 'Thira Sans Fallback', sans-serif;
 }
 ```
 
 Every weight from 100 to 700 is then available, including in-between values such as `font-weight: 450`.
+
+### Fallback without layout shift
+
+Every CSS file also registers `Thira Sans Fallback`: Arial for Latin and Tahoma for Thai (both installed on Windows and macOS), resized with `size-adjust` and given Thira Sans' ascent and descent. Put it right after `Thira Sans`. Text drawn before the webfont arrives then has the same line length and line height, so nothing jumps when the font swaps in. On systems without Arial or Tahoma it is skipped and the next font in your stack is used.
+
+It is also available on its own as `thira-sans/fallback.css`.
 
 ### Static weights
 
@@ -61,7 +67,7 @@ Below that, the tallest stacks can be cut at the top of the first line and the b
 
 ## Status
 
-0.x: Thira Sans has soft, rounded corners since 0.2.0 and supports `ss03` (single-storey a/g), `ss04` (dotted zero) and `zero` (slashed zero). Since 0.3.0 `line-height: normal` is 1.5 and stacked Thai marks are no longer clipped on Windows. It is a fork of [Anuphan](https://github.com/cadsondemak/Anuphan) by Cadson Demak and is being redesigned. Glyph shapes and metrics will change between minor versions.
+0.x: Thira Sans has soft, rounded corners since 0.2.0 and supports `ss03` (single-storey a/g), `ss04` (dotted zero) and `zero` (slashed zero). Since 0.3.0 `line-height: normal` is 1.5 and stacked Thai marks are no longer clipped on Windows. 0.4.0 adds the metric-matched `Thira Sans Fallback`. It is a fork of [Anuphan](https://github.com/cadsondemak/Anuphan) by Cadson Demak and is being redesigned. Glyph shapes and metrics will change between minor versions.
 
 ## License
 

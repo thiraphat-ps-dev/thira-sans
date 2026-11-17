@@ -35,6 +35,8 @@ jobs:
         run: test "$GITHUB_REF_NAME" = "main"
       - name: Build fonts
         run: gftools builder sources/config.yaml
+      - name: Metric-matched fallback CSS
+        run: python scripts/fallback-metrics.py css fonts/ttf
       - name: Assemble the npm package
         run: node scripts/package-npm.mjs
       - name: Publish (skip if this version is already on npm)

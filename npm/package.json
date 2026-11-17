@@ -30,6 +30,10 @@
       "types": "./index.d.ts",
       "default": "./index.css"
     },
+    "./fallback.css": {
+      "types": "./index.d.ts",
+      "default": "./fallback.css"
+    },
     "./100.css": {
       "types": "./index.d.ts",
       "default": "./100.css"

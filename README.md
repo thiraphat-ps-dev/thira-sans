@@ -16,7 +16,11 @@ npm install thira-sans
 import 'thira-sans'; // variable font, weights 100–700
 ```
 
-See [npm/README.md](npm/README.md) for static weights.
+```css
+body { font-family: 'Thira Sans', 'Thira Sans Fallback', sans-serif; }
+```
+
+`Thira Sans Fallback` is Arial (Latin) and Tahoma (Thai), installed on Windows and macOS, resized with `size-adjust` and given Thira Sans' ascent and descent. Text shown before the webfont loads has the same line length and line height, so the page doesn't jump when the font swaps in. It ships in every CSS entry point. See [npm/README.md](npm/README.md) for static weights.
 
 ### OpenType features
 
@@ -52,6 +56,8 @@ Below that, the tallest stacks can be cut at the top of the first line and the b
 | `proof/index.html`         | Proof page: display text, Thai mark stacking, `line-clamp` clipping, weights    |
 | `npm/`, `scripts/`         | The npm package (`thira-sans`): CSS + woff2, assembled from the build by `scripts/package-npm.mjs` |
 | `scripts/round-corners.mjs` | One-off transform that rounded the corners of every master (already applied; don't run it twice) |
+| `scripts/fallback-metrics.py` | Generates `npm/fallback.css`. `measure` reads Arial/Tahoma locally into `scripts/fallback-fonts.json` (rerun only if you change the sample text); `css` runs in CI against the built fonts |
+| `scripts/check-metrics.py` | CI check: win metrics cover shaped Thai/Latin stacks; prints the smallest safe line-height |
 | `scripts/preview-glyphs.mjs` | Renders glyphs from a `.glyphs` file to HTML/SVG, for checking shapes without building |
 | `.github/workflows/`       | CI builds TTF/OTF/variable/webfonts, uploads them as an artifact and deploys the proof to Pages |
 
@@ -79,8 +85,11 @@ Thai mark positioning comes from anchors (`top`, `bottom`, `_top`, …) plus the
 
 1. ~~Pick the character~~: soft, rounded corners (0.200). Next: head shapes (loop, loopless or cut) and proportions.
 2. Redraw the Thai consonants that carry that character, then propagate it through the rest of the set.
-3. Retune spacing and vertical metrics for UI use (`line-clamp` safe, comfortable at 14–16px).
-4. Use Thira Sans in thira-ui and the portfolio. (Published to npm as `thira-sans` since 0.1.0.)
+3. Tune for UI use.
+   - ~~Vertical metrics~~ (0.3.0): `line-height: normal` is 1.5, `line-clamp` safe, stacked Thai marks not clipped on Windows.
+   - ~~Metric-matched fallback~~ (`Thira Sans Fallback`) so the font swap doesn't shift layout.
+   - Next: horizontal spacing, so text is comfortable at 14–16px.
+4. ~~Use Thira Sans in thira-ui and the portfolio~~ (published to npm as `thira-sans` since 0.1.0).
 
 ## Credits
 

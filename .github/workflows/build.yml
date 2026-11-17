@@ -26,6 +26,8 @@ jobs:
         run: gftools builder sources/config.yaml
       - name: Check vertical metrics against shaped Thai and Latin stacks
         run: python scripts/check-metrics.py fonts/ttf/*.ttf
+      - name: Metric-matched fallback CSS
+        run: python scripts/fallback-metrics.py css fonts/ttf
       - name: Variable webfont for the proof page
         run: |
           mkdir -p proof/fonts
@@ -38,6 +40,7 @@ jobs:
           path: |
             fonts/
             proof/
+            npm/fallback.css
             OFL.txt
       - name: Package the proof page for GitHub Pages
         if: github.ref == 'refs/heads/main'
