@@ -15,8 +15,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
           cache: pip
@@ -34,7 +34,7 @@ jobs:
           vf=$(ls fonts/variable/*.ttf | head -n 1)
           fonttools ttLib.woff2 compress -o proof/fonts/ThiraSans-VF.woff2 "$vf"
           ls -la fonts/* proof/fonts
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: thira-sans
           path: |
@@ -44,7 +44,7 @@ jobs:
             OFL.txt
       - name: Package the proof page for GitHub Pages
         if: github.ref == 'refs/heads/main'
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: proof/
 
@@ -64,4 +64,4 @@ jobs:
       cancel-in-progress: true
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
