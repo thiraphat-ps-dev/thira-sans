@@ -26,6 +26,8 @@ jobs:
         run: gftools builder sources/config.yaml
       - name: Check vertical metrics against shaped Thai and Latin stacks
         run: python scripts/check-metrics.py fonts/ttf/*.ttf
+      - name: Font version matches npm/package.json
+        run: python scripts/check-version.py fonts/ttf/*.ttf fonts/variable/*.ttf
       - name: Metric-matched fallback CSS
         run: python scripts/fallback-metrics.py css fonts/ttf
       - name: Variable webfont for the proof page

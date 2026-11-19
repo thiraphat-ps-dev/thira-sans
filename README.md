@@ -59,6 +59,7 @@ Below that, the tallest stacks can be cut at the top of the first line and the b
 | `scripts/round-corners.mjs` | One-off transform that rounded the corners of every master (already applied; don't run it twice) |
 | `scripts/fallback-metrics.py` | Generates `npm/fallback.css`. `measure` reads Arial/Tahoma locally into `scripts/fallback-fonts.json` (rerun only if you change the sample text); `css` runs in CI against the built fonts |
 | `scripts/check-metrics.py` | CI check: win metrics cover shaped Thai/Latin stacks; prints the smallest safe line-height |
+| `scripts/check-version.py` | CI check: the built fonts' version matches `npm/package.json` (npm X.Y.Z = font X.(100·Y+Z), e.g. 0.5.0 = 0.500) |
 | `scripts/preview-glyphs.mjs` | Renders glyphs from a `.glyphs` file to HTML/SVG, for checking shapes without building |
 | `.github/workflows/`       | CI builds TTF/OTF/variable/webfonts, uploads them as an artifact and deploys the proof to Pages |
 

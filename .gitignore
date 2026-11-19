@@ -6,3 +6,7 @@ npm/files/
 npm/*.css
 npm/OFL.txt
 __pycache__/
+# gftools builder leftovers
+sources/build.ninja
+sources/.ninja_log
+sources/instance_ufos/
