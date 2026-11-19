@@ -4,7 +4,7 @@ A Thai + Latin sans-serif, variable weight 100–700. Thira Sans is a fork of [A
 
 **Proof page:** https://thiraphat-ps-dev.github.io/thira-sans/
 
-**Status: 0.5.0 (font version 0.500), soft corners.** Every sharp corner of the Anuphan outlines is rounded (radius grows with weight), which gives Thira Sans a friendlier, softer tone that matches [thira-ui](https://github.com/thiraphat-ps-dev/thira-ui). Letter shapes are otherwise still Anuphan's; see [Roadmap](#roadmap).
+**Status: 0.6.0 (font version 0.600), soft corners.** Every sharp corner of the Anuphan outlines is rounded (radius grows with weight), which gives Thira Sans a friendlier, softer tone that matches [thira-ui](https://github.com/thiraphat-ps-dev/thira-ui). Letter shapes are otherwise still Anuphan's; see [Roadmap](#roadmap).
 
 ## Use it on the web
 
