@@ -4,7 +4,7 @@ A Thai + Latin sans-serif, variable weight 100–700. Thira Sans is a fork of [A
 
 **Proof page:** https://thiraphat-ps-dev.github.io/thira-sans/
 
-**Status: 0.200, soft corners.** Every sharp corner of the Anuphan outlines is rounded (radius grows with weight), which gives Thira Sans a friendlier, softer tone that matches [thira-ui](https://github.com/thiraphat-ps-dev/thira-ui). Letter shapes are otherwise still Anuphan's; see [Roadmap](#roadmap).
+**Status: 0.5.0 (font version 0.500), soft corners.** Every sharp corner of the Anuphan outlines is rounded (radius grows with weight), which gives Thira Sans a friendlier, softer tone that matches [thira-ui](https://github.com/thiraphat-ps-dev/thira-ui). Letter shapes are otherwise still Anuphan's; see [Roadmap](#roadmap).
 
 ## Use it on the web
 
@@ -61,6 +61,7 @@ Below that, the tallest stacks can be cut at the top of the first line and the b
 | `scripts/check-metrics.py` | CI check: win metrics cover shaped Thai/Latin stacks; prints the smallest safe line-height |
 | `scripts/check-version.py` | CI check: the built fonts' version matches `npm/package.json` (npm X.Y.Z = font X.(100·Y+Z), e.g. 0.5.0 = 0.500) |
 | `scripts/preview-glyphs.mjs` | Renders glyphs from a `.glyphs` file to HTML/SVG, for checking shapes without building |
+| `CHANGELOG.md`             | Release notes                                                                   |
 | `.github/workflows/`       | CI builds TTF/OTF/variable/webfonts, uploads them as an artifact and deploys the proof to Pages |
 
 ## Building
