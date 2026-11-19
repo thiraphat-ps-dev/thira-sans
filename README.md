@@ -31,6 +31,7 @@ body { font-family: 'Thira Sans', 'Thira Sans Fallback', sans-serif; }
 | `ss03`  | Single-storey **a** and **g** (and their accented forms) |
 | `ss04`  | Dotted zero |
 | `zero`  | Slashed zero |
+| `tnum`  | Tabular Thai digits ๐–๙: 600 units wide, the same as the Latin figures (which are always tabular). The wide ๒ ๓ ๗ ๘ ๙ are condensed to fit. Use `font-variant-numeric: tabular-nums` |
 
 ```css
 body { font-feature-settings: 'ss03'; }
