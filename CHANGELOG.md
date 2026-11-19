@@ -2,6 +2,11 @@
 
 Versions are the npm package versions. The font's own version (name table and `head`) is X.(100·Y+Z) for npm X.Y.Z, so npm 0.5.0 is font version 0.500. CI checks that they agree (`scripts/check-version.py`).
 
+## Unreleased
+
+- Thai spacing, tuned for 14–16px text. Sidebearings changed per master: ะ has less space after it (ประเทศ, และ, ตะกร้า no longer break apart). โ ใ ไ sit closer to the letter before them. ษ ฉ get more space after them, ฎ ฏ ภ ฦ more space before them (เภ, ไฏ no longer touch), and ฬ more after its tail. The shift for โ ใ ไ stops short of where it would push tone marks on the letter before into the vowel's tail (ที่ไหน, ก็ไม่).
+- Tabular Thai digits ๒ ๓ ๗ ๘ ๙: redrawn instead of squeezed, so their vertical stems stay close to the regular digits' weight (๗ at Bold: 112 units, was 91; the default ๗ is 129).
+
 ## 0.5.0 (unreleased)
 
 - `tnum`: tabular Thai digits. `font-variant-numeric: tabular-nums` makes ๐–๙ 600 units wide at every weight, the same as the Latin figures, so Thai and Latin numbers line up in tables. The wide digits ๒ ๓ ๗ ๘ ๙ are condensed horizontally to fit; default (proportional) Thai digits are unchanged.
